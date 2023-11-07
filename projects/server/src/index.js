@@ -2,16 +2,17 @@ require("dotenv/config");
 const express = require("express");
 const cors = require("cors");
 const { join } = require("path");
+const router = require("./routes");
 
 const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(
-  cors({
+  cors(/* {
     origin: [
       process.env.WHITELISTED_DOMAIN &&
         process.env.WHITELISTED_DOMAIN.split(","),
     ],
-  })
+  } */)
 );
 
 app.use(express.json());
@@ -20,6 +21,14 @@ app.use(express.json());
 
 // ===========================
 // NOTE : Add your routes here
+
+/* USER ROUTE */
+app.use("/api/user", router.user);
+
+/* ADMIN ROUTE */
+app.use("/api/admin", router.admin);
+
+/* OTHER ROUTE */
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
