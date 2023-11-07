@@ -2,7 +2,7 @@ import React from "react";
 
 const ManajemenUser = () => {
   return (
-    <div className="bg-yellow-200 w-full">
+    <div className="bg-slate-100 w-full h-screen">
       <h1>Manajemen User</h1>
     </div>
   );
