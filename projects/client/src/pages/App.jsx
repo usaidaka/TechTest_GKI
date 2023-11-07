@@ -13,6 +13,7 @@ import Dashboard from "./admin/Dashboard";
 import NavAdmin from "../components/admin/NavAdmin";
 import NavUser from "../components/user/NavUser";
 import ManajemenProduk from "./admin/ManajemenProduk";
+import { AuthContextProvider } from "../context/AuthContext";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -31,7 +32,9 @@ export default function App() {
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </div>
   );
 }
