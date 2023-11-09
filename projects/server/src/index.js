@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { join } = require("path");
 const router = require("./routes");
+const path = require("path");
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -22,13 +23,29 @@ app.use(express.json());
 // ===========================
 // NOTE : Add your routes here
 
+/* MULTER */
+app.use(
+  "/api/image-profile",
+  express.static(path.join(__dirname, "public", "imageProfile"))
+);
+
+app.use(
+  "/api/image-product",
+  express.static(path.join(__dirname, "public", "imageProduct"))
+);
+
+app.use(
+  "/api/image-category",
+  express.static(path.join(__dirname, "public", "imageCategory"))
+);
+
 /* USER ROUTE */
 app.use("/api/user", router.user);
 
 /* ADMIN ROUTE */
 app.use("/api/admin", router.admin);
 
-/* OTHER ROUTE */
+// ===========================
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
