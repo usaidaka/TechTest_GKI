@@ -43,7 +43,15 @@ const TableBodyUsersList = ({ body, refetch }) => {
           <td className="py-2 px-4">{user.email}</td>
           <td className="py-2 px-4">{user.phone}</td>
           <td className="py-2 px-4">{user.Role?.name}</td>
-          <td className="py-2 px-4">{user.is_active ? "true" : "false"}</td>
+          <td className={`py-2 px-4 `}>
+            <span
+              className={` ${
+                user.is_active ? "bg-green-600" : "bg-red-600"
+              } text-white px-2 rounded-full font-inter text-sm`}
+            >
+              {user.is_active ? "active" : "inactive"}
+            </span>
+          </td>
           <td className="py-2 px-4  ">
             {user.deletedAt ? (
               <Badge color="failure" className="w-fit">

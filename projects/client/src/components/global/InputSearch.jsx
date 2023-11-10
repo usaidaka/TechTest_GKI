@@ -1,7 +1,7 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 
-const InputSearch = ({ name, id, placeholder, onChange }) => {
+const InputSearch = ({ name, id, placeholder, onChange, onClick }) => {
   return (
     <div className="overflow-hidden flex justify-center items-center focus-within:border-cyan-600 focus-within:ring-cyan-600 rounded-lg border-2 w-full">
       <form action="" className="flex items-center w-full">
@@ -14,7 +14,10 @@ const InputSearch = ({ name, id, placeholder, onChange }) => {
           onChange={onChange}
         />
 
-        <button className="bg-cyan-600 h-10 w-10 text-white ml-2 flex items-center justify-center">
+        <button
+          className="bg-white h-10 w-10 text-blue-600 ml-2 flex items-center justify-center"
+          onClick={onClick}
+        >
           <FiSearch />
         </button>
       </form>

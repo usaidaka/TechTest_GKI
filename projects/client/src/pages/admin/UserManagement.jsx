@@ -1,14 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import TableGlobal from "../../components/global/TableGlobal";
 import axios from "../../api/axios";
-import { Pagination } from "flowbite-react";
+import { Pagination, ToggleSwitch } from "flowbite-react";
 import ModalForm from "../../components/global/ModalForm";
 import { BiSolidUserPlus } from "react-icons/bi";
 import withAuth from "../withAuth";
-import { useSelector } from "react-redux";
+import InputSearch from "../../components/global/InputSearch";
 
 const UserManagement = () => {
   const [usersList, setUsersList] = useState([]);
+  const [byStatus, setByStatus] = useState(true);
+  const [byName, setByName] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -20,9 +24,11 @@ const UserManagement = () => {
   adminPermission = userDoc.Role?.name === "Admin";
 
   const fetchUserList = useCallback(async () => {
+    console.log("byName:", byName);
+    console.log("byStatus:", byStatus);
     try {
       const response = await axios.get(
-        `/admin/user-list?role=&page=${currentPage}&perPage=10`
+        `/admin/user-list?role=&page=${currentPage}&perPage=10&byName=${byName}&byStatus=${byStatus}`
       );
 
       setTotalPage(response.data?.pagination?.totalPages);
@@ -38,7 +44,7 @@ const UserManagement = () => {
         setErrMsg("An error occurred while fetching data.");
       }
     }
-  }, [currentPage]);
+  }, [byName, byStatus, currentPage]);
 
   useEffect(() => {
     fetchUserList();
@@ -56,6 +62,7 @@ const UserManagement = () => {
     { title: "Status" },
     { title: "Option" },
   ];
+  console.log(byStatus);
   return (
     <div className="bg-slate-100 w-full">
       <div className=" m-8 space-y-6">
@@ -76,12 +83,29 @@ const UserManagement = () => {
             />
           ) : null}
         </div>
+        <div className="flex items-center gap-6">
+          <InputSearch
+            name="byName"
+            id="byName"
+            placeholder="Search user by name"
+            onChange={(e) => setByName(e.target.value)}
+          />
+          <div className="">
+            <ToggleSwitch
+              checked={byStatus}
+              label={`${byStatus ? "active" : "inactive"}`}
+              onChange={() => setByStatus(!byStatus)}
+            />
+          </div>
+        </div>
+
         <TableGlobal
           head={head}
           body={usersList}
           tableUseFor="UsersList"
           refetch={fetchUserList}
         />
+
         <Pagination
           currentPage={currentPage}
           onPageChange={handlePage}

@@ -5,14 +5,17 @@ import { FaEdit } from "react-icons/fa";
 
 import ModalForm from "../../components/global/ModalForm";
 import CardProduct from "../../components/global/CardProduct";
-import { Pagination } from "flowbite-react";
+import { Pagination, ToggleSwitch } from "flowbite-react";
 import axios from "../../api/axios";
 import ModalDeleteConfirmation from "../../components/global/ModalDeleteConfirmation";
 import withAuth from "../withAuth";
 import { useSelector } from "react-redux";
+import InputSearch from "../../components/global/InputSearch";
 
 const ManagementProduct = () => {
   const [productsList, setProductsList] = useState([]);
+  const [byStatus, setByStatus] = useState(true);
+  const [byName, setByName] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -26,7 +29,7 @@ const ManagementProduct = () => {
   const fetchProduct = useCallback(async () => {
     try {
       const response = await axios.get(
-        `/admin/product-list?page=${currentPage}&perPage=5`
+        `/admin/product-list?page=${currentPage}&perPage=5&byName=${byName}&byStatus=${byStatus}`
       );
       setProductsList(response.data?.rows);
       setTotalPage(response.data?.pagination?.totalPages);
@@ -41,7 +44,7 @@ const ManagementProduct = () => {
         setErrMsg("An error occurred while fetching data.");
       }
     }
-  }, [currentPage]);
+  }, [byName, byStatus, currentPage]);
 
   useEffect(() => {
     fetchProduct();
@@ -71,6 +74,21 @@ const ManagementProduct = () => {
             />
           ) : null}
         </div>
+        <div className="flex items-center gap-6">
+          <InputSearch
+            name="byName"
+            id="byName"
+            placeholder="Search product by name"
+            onChange={(e) => setByName(e.target.value)}
+          />
+          <div className="">
+            <ToggleSwitch
+              checked={byStatus}
+              label={`${byStatus ? "active" : "inactive"}`}
+              onChange={() => setByStatus(!byStatus)}
+            />
+          </div>
+        </div>
         <div className="flex bg-white rounded-lg gap-2 p-5">
           {productsList.map((product, idx) => (
             <div className={`shadow-card-1 rounded-lg `} key={idx}>
@@ -82,6 +100,7 @@ const ManagementProduct = () => {
                 price={product.price}
                 key={product.id}
                 isDeleted={product.deletedAt}
+                isActive={product.is_active}
               />
               <div className="flex gap-x-2 justify-end p-4 rounded-lg">
                 {product.deletedAt || !adminPermission ? null : (

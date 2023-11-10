@@ -17,6 +17,8 @@ module.exports = {
       perPage: Number(req.query.perPage) || 2,
 
       filterRole: Number(req.query.role) || 2,
+      byName: req.query.byName || "",
+      byStatus: req.query.byStatus === "true",
     };
 
     try {
@@ -28,6 +30,8 @@ module.exports = {
         },
         where: {
           role_id: pagination.filterRole,
+          username: { [Op.like]: `%${pagination.byName}%` },
+          is_active: pagination.byStatus,
         },
         paranoid: false,
         limit: pagination.perPage,
@@ -73,11 +77,19 @@ module.exports = {
     const pagination = {
       page: Number(req.query.page) || 1,
       perPage: Number(req.query.perPage) || 2,
+      byName: req.query.byName || "",
+      byStatus: req.query.byStatus === "true",
     };
 
     try {
       const { count, rows } = await db.Product.findAndCountAll({
         attributes: { exclude: ["updatedAt", "createdAt"] },
+        where: {
+          name: {
+            [Op.like]: `%${pagination.byName}%`,
+          },
+          is_active: pagination.byStatus,
+        },
         include: {
           model: db.Category,
           attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },

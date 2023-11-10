@@ -9,9 +9,10 @@ const CardProduct = ({
   name,
   desc,
   price,
-  id,
+  isActive,
   isDeleted = null,
 }) => {
+  console.log(isActive);
   return (
     <div className="bg-white flex flex-col justify-center items-center font-inter">
       <div className="w-36 md:w-52 h-full  flex flex-col items-center hover:shadow-card-1 transition-all ease-out duration-400 rounded-lg m-3">
@@ -23,7 +24,7 @@ const CardProduct = ({
           />
         </div>
         <div className=" w-full h-28 flex flex-col justify-end  p-4 mt-10">
-          <div>
+          <div className="flex gap-2">
             {isDeleted ? (
               <Badge color="failure" className="w-fit">
                 Deleted
@@ -31,6 +32,15 @@ const CardProduct = ({
             ) : (
               <Badge color="purple" className="w-fit">
                 {category}
+              </Badge>
+            )}
+            {isActive ? (
+              <Badge color="success" className="w-fit">
+                Active
+              </Badge>
+            ) : (
+              <Badge color="pink" className="w-fit">
+                Inactive
               </Badge>
             )}
           </div>
