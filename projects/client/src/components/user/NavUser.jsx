@@ -25,12 +25,8 @@ const NavUser = () => {
           <img src={buLogo} alt="" className="w-10" />
         </div>
         {isAdmin ? null : (
-          <div className="col-span-1 flex w-full justify-center">
-            <InputSearch
-              name="search-product"
-              id="search-product"
-              placeholder="Temukan Produk"
-            />
+          <div className="col-span-1 flex w-full justify-center items-center">
+            <h1 className="text-4xl font-inter">ALWAYS B•U</h1>
           </div>
         )}
         {access_token && userDoc ? (

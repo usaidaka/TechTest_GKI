@@ -46,7 +46,7 @@ const AvailableProduct = () => {
 
   return (
     <div className="ml-4">
-      <p className="font-libre font-bold">Available Product</p>
+      <p className="font-lobster font-bold">Available Product</p>
       <div>
         <InfiniteScroll
           dataLength={list.length}
@@ -64,8 +64,8 @@ const AvailableProduct = () => {
           }
         >
           <div className="flex flex-wrap">
-            {list.map((product) => (
-              <div key={product.id}>
+            {list.map((product, idx) => (
+              <div key={idx}>
                 <CardProduct
                   src={`${process.env.REACT_APP_API_BASE_URL}${product?.image_product}`}
                   category={product?.Category?.name}

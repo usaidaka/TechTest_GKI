@@ -7,28 +7,35 @@ module.exports = {
       {
         id: 1,
         name: "Citrus",
-        image_category: null,
+        image_category: "/image-category/citrus.jpg",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 2,
         name: "Floral",
-        image_category: null,
+        image_category: "/image-category/floral.jpg",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 3,
         name: "Woody",
-        image_category: null,
+        image_category: "/image-category/fruity.jpg",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 4,
         name: "Oriental",
-        image_category: null,
+        image_category: "/image-category/woody.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 5,
+        name: "Gourmandl",
+        image_category: "/image-category/gourmand.jpg",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -36,11 +43,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    return queryInterface.bulkDelete("Categories", null, {});
   },
 };

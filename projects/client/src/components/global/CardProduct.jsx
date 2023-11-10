@@ -9,7 +9,7 @@ const CardProduct = ({
   name,
   desc,
   price,
-  isActive,
+  isActive = true,
   isDeleted = null,
 }) => {
   console.log(isActive);

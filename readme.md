@@ -2,6 +2,33 @@
 
 This is monorepo contain frontend project using ReactJS and backend project using ExpressJS.
 
+## How to do first set up
+
+### initial instal
+
+- clone this repository
+- npm install
+
+#### env set up
+
+- set up all .env require form. you can check on .env.exp
+- you can use my SMTP account or you can use your own
+
+### database preparation & backend initialization
+
+#### initialization schema
+
+- go to projects/server/src
+- create schema by doing sequelize-cli db:create (don't forget to fill the .env in # config ORM form)
+- migrate the table by doing : sequelize-cli db:migrate
+- seed all the seeder by doing : sequelize-cli db:seed:all
+
+#### Techtest-gki.zip
+
+- you can extract Techtest-gki.zip folder
+- i attached a postman for backend checking if require
+- i attached a database export as require
+
 ## Available Scripts
 
 In the project directory, you can run:

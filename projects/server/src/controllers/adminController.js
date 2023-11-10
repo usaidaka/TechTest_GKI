@@ -114,16 +114,6 @@ module.exports = {
         });
       }
 
-      const get10NewestProduct = await db.Product.findAll({
-        attributes: { exclude: ["updatedAt", "deletedAt"] },
-        include: {
-          model: db.Category,
-          attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
-        },
-        limit: 10,
-        order: [["id", "DESC"]],
-      });
-
       res.status(200).json({
         ok: true,
         message: "retrieving user list successful",
@@ -133,7 +123,31 @@ module.exports = {
           count,
         },
         rows,
-        NewestProduct: get10NewestProduct,
+      });
+    } catch (error) {
+      res.status(500).json({
+        ok: false,
+        message: "Something bad happened",
+        error: error.message,
+      });
+    }
+  },
+
+  get10NewestProduct: async (req, res) => {
+    try {
+      const get10NewestProduct = await db.Product.findAll({
+        attributes: { exclude: ["updatedAt", "deletedAt"] },
+        include: {
+          model: db.Category,
+          attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+        },
+        limit: 10,
+        order: [["id", "DESC"]],
+      });
+      res.json({
+        ok: true,
+        message: "retrieving newest product list successful",
+        data: get10NewestProduct,
       });
     } catch (error) {
       res.status(500).json({

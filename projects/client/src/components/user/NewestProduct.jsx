@@ -11,8 +11,8 @@ const NewestProduct = () => {
   useEffect(() => {
     const fetchNewestProduct = async () => {
       try {
-        const response = await axios.get("/admin/product-list");
-        setNewestProduct(response.data.NewestProduct);
+        const response = await axios.get("/admin/product-newest");
+        setNewestProduct(response.data?.data);
       } catch (error) {
         if (
           error.response &&
@@ -54,14 +54,15 @@ const NewestProduct = () => {
       name={product.name}
       desc={product.description}
       price={product.price}
+      isActive={product.is_active}
       key={product.id}
     />
   ));
 
   return (
     <div className="space-y-2">
-      <h1 className="ml-4 font-libre font-bold">Newest Product</h1>
-      <div className="z-0 ">
+      <h1 className="ml-4 font-lobster font-bold">Newest Product</h1>
+      <div className="z-0 relative">
         <Carousel
           responsive={responsive}
           removeArrowOnDeviceType={["tablet", "mobile"]}

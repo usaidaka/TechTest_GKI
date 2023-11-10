@@ -7,8 +7,7 @@ import {
   HiArrowSmLeft,
 } from "react-icons/hi";
 import buLogo from "../../assets/android-chrome-192x192.png";
-import { logout } from "../../utils/tokenGetterSetter";
-import { UserAuth } from "../../context/AuthContext";
+
 import ModalDeleteConfirmation from "../global/ModalDeleteConfirmation";
 
 const NavAdmin = () => {

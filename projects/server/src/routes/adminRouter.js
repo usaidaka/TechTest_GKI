@@ -9,6 +9,7 @@ const adminValidator = require("../middleware/validator/adminValidator");
 /* GET METHOD */
 router.get("/user-list", adminController.getAllUser);
 router.get("/product-list", adminController.getAllProductParanoid);
+router.get("/product-newest", adminController.get10NewestProduct);
 router.get("/category", adminController.getAllCategory);
 router.get("/report-dashboard", adminController.reportDashboard);
 router.get("/user/:userID", adminController.getUserByID);
