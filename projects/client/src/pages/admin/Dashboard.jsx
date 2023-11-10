@@ -33,8 +33,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchNewestProduct = async () => {
       try {
-        const response = await axios.get("/admin/product-list");
-        setNewestProduct(response.data.NewestProduct);
+        const response = await axios.get("/admin/product-newest");
+        setNewestProduct(response.data?.data);
       } catch (error) {
         if (
           error.response &&

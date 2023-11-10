@@ -1,5 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
+import { rupiahFormat } from "../../utils/formatter";
 
 const TableBodyNewestProduct = ({ body }) => {
   return (
@@ -15,7 +16,7 @@ const TableBodyNewestProduct = ({ body }) => {
           <td className="py-2 px-4">
             {dayjs(product.createdAt).format("DD MMMM YYYY")}
           </td>
-          <td className="py-2 px-4">${product.price}</td>
+          <td className="py-2 px-4">{rupiahFormat(product.price)}</td>
         </tr>
       ))}
     </>
