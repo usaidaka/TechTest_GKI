@@ -323,7 +323,7 @@ module.exports = {
         category_id: 5,
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus veniam omnis voluptates voluptatem! Tenetur, ipsum?",
-        image_product: "/image-product/1.jpeg",
+        image_product: "/image-product/25.jpeg",
         is_active: true,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -336,7 +336,7 @@ module.exports = {
         category_id: 4,
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus veniam omnis voluptates voluptatem! Tenetur, ipsum?",
-        image_product: "/image-product/1.jpeg",
+        image_product: "/image-product/26.jpeg",
         is_active: true,
         createdAt: new Date(),
         updatedAt: new Date(),
