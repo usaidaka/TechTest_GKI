@@ -10,7 +10,7 @@
     "start": "nodemon",
     "serve": "node .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "cd models && npm install"
+    "preinstall": "npm install"
   },
   "dependencies": {
     "@vercel/node": "^3.0.10",
