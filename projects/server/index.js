@@ -2,7 +2,7 @@ require("dotenv/config");
 const express = require("express");
 const cors = require("cors");
 const { join } = require("path");
-const router = require("./routes");
+const router = require("./src/routes");
 const path = require("path");
 
 const PORT = process.env.PORT || 8000;
@@ -26,17 +26,17 @@ app.use(express.json());
 /* MULTER */
 app.use(
   "/api/image-profile",
-  express.static(path.join(__dirname, "public", "imageProfile"))
+  express.static(path.join(__dirname, "src", "public", "imageProfile"))
 );
 
 app.use(
   "/api/image-product",
-  express.static(path.join(__dirname, "public", "imageProduct"))
+  express.static(path.join(__dirname, "src", "public", "imageProduct"))
 );
 
 app.use(
   "/api/image-category",
-  express.static(path.join(__dirname, "public", "imageCategory"))
+  express.static(path.join(__dirname, "src", "public", "imageCategory"))
 );
 
 /* USER ROUTE */
