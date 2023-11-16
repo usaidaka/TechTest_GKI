@@ -27,7 +27,7 @@ const NavUser = () => {
         if (!response.data?.ok) {
           setErrMsg(response.error?.message);
         }
-        console.log("response dr login", response);
+
         dispatch(userDocuments(response.data?.data));
       } catch (error) {
         if (
