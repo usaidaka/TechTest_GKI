@@ -9,8 +9,10 @@ import { Pagination, ToggleSwitch } from "flowbite-react";
 import axios from "../../api/axios";
 import ModalDeleteConfirmation from "../../components/global/ModalDeleteConfirmation";
 import withAuth from "../withAuth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InputSearch from "../../components/global/InputSearch";
+import { getLocalStorage } from "../../utils/tokenGetterSetter";
+import { userDocuments } from "../../features/userDoc";
 
 const ManagementProduct = () => {
   const [productsList, setProductsList] = useState([]);
@@ -19,12 +21,41 @@ const ManagementProduct = () => {
   const [errMsg, setErrMsg] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+  const access_token = getLocalStorage("access_token");
+  const dispatch = useDispatch();
   const userDoc = useSelector((state) => state.userDocument.value);
+
   let adminPermission = false;
   if (userDoc === undefined) {
     adminPermission = false;
   }
   adminPermission = userDoc.Role?.name === "Admin";
+
+  useEffect(() => {
+    const userInformation = async () => {
+      try {
+        const response = await axios.get("/user/profile", {
+          headers: { Authorization: `Bearer ${access_token}` },
+        });
+        if (!response.data?.ok) {
+          setErrMsg(response.error?.message);
+        }
+
+        dispatch(userDocuments(response.data?.data));
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setErrMsg(error.response.data.message);
+        } else {
+          setErrMsg("An error occurred while fetching data.");
+        }
+      }
+    };
+    userInformation();
+  }, [access_token, dispatch]);
 
   const fetchProduct = useCallback(async () => {
     try {

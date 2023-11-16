@@ -44,12 +44,8 @@ const FormEditProduct = ({ refetch, onClose, data }) => {
   }, []);
 
   const editProduct = async (values) => {
-    console.log("values", values);
-
     values.category_id = Number(selectedCategory);
     values.is_active = isActive;
-    console.log(values.price);
-    console.log(values.is_active);
 
     try {
       const formData = new FormData();
@@ -66,9 +62,8 @@ const FormEditProduct = ({ refetch, onClose, data }) => {
           headers: { Authorization: `Bearer ${access_token}` },
         }
       );
-      console.log("create", response);
+
       if (response.data.ok) {
-        console.log("masuk");
         refetch();
         onClose();
       }

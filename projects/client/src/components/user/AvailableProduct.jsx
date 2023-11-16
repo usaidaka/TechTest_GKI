@@ -18,7 +18,7 @@ const AvailableProduct = () => {
         const response = await axios.get(
           `/user/product?lastID=${lastID}&limit=10`
         );
-        console.log(response);
+
         const newList = response.data?.result;
         setList([...list, ...newList]);
         setTempID(response.data?.lastID);

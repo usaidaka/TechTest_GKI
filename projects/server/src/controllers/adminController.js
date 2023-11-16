@@ -604,7 +604,6 @@ module.exports = {
       const previousImageName = product
         .getDataValue("image_product")
         ?.split("/")[2];
-      console.log("edit product", previousImageName);
 
       if (!previousImageName) {
         await db.Product.update(
@@ -697,7 +696,6 @@ module.exports = {
         const previousImageName = category
           .getDataValue("image_category")
           ?.split("/")[2];
-        console.log("edit category", previousImageName);
 
         if (!previousImageName) {
           await db.Category.update(

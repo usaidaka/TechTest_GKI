@@ -11,7 +11,6 @@ import { getLocalStorage } from "../../../utils/tokenGetterSetter";
 import AlertNotification from "../../global/AlertNotification";
 
 const FormEditUser = ({ refetch, onClose, data }) => {
-  console.log(data);
   const [errMsg, setErrMsg] = useState("");
   const [image, setImage] = useState(null);
   const [showImage, setShowImage] = useState(false);

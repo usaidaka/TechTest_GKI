@@ -31,7 +31,7 @@ const SignIn = () => {
       if (!response.data?.ok) {
         setErrMsg(response.error?.message);
       }
-      console.log("response dr login", response);
+
       dispatch(userDocuments(response.data?.data));
     } catch (error) {
       if (
@@ -96,10 +96,7 @@ const SignIn = () => {
     const { target } = event;
     formik.setFieldValue(target.name, target.value);
   };
-  console.log(errMsg);
 
-  if (errMsg) {
-  }
   return (
     <>
       {errMsg ? (

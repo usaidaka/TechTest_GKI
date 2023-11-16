@@ -12,7 +12,6 @@ const CardProduct = ({
   isActive = true,
   isDeleted = null,
 }) => {
-  console.log(isActive);
   return (
     <div className="bg-white flex flex-col justify-center items-center font-inter">
       <div className="w-36 md:w-52 h-full  flex flex-col items-center hover:shadow-card-1 transition-all ease-out duration-400 rounded-lg m-3">

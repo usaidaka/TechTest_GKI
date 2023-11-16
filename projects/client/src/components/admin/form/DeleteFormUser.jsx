@@ -11,7 +11,7 @@ const DeleteFormUser = ({ onClose, data, refetch }) => {
       const response = await axios.delete(`/admin/user/${data.id}`, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
-      console.log(response);
+
       if (!response.data.ok) {
         setErrMsg(response.data.message);
       }

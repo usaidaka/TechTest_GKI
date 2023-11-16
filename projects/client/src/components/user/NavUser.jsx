@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import buLogo from "../../assets/android-chrome-512x512.png";
 import InputSearch from "../global/InputSearch";
 import { useLocation } from "react-router-dom";
 import ButtonLink from "../global/ButtonLink";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getLocalStorage } from "../../utils/tokenGetterSetter";
 import { Badge } from "flowbite-react";
+import { userDocuments } from "../../features/userDoc";
+import axios from "../../api/axios";
 
 const NavUser = () => {
   const userDoc = useSelector((state) => state.userDocument.value);
+  const [errMsg, setErrMsg] = useState("");
   const access_token = getLocalStorage("access_token");
+
+  const dispatch = useDispatch();
   const location = useLocation();
   const isAdmin = location.pathname.includes("admin");
+
+  useEffect(() => {
+    const userInformation = async () => {
+      try {
+        const response = await axios.get("/user/profile", {
+          headers: { Authorization: `Bearer ${access_token}` },
+        });
+        if (!response.data?.ok) {
+          setErrMsg(response.error?.message);
+        }
+        console.log("response dr login", response);
+        dispatch(userDocuments(response.data?.data));
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setErrMsg(error.response.data.message);
+        } else {
+          setErrMsg("An error occurred while fetching data.");
+        }
+      }
+    };
+    userInformation();
+  }, [access_token, dispatch]);
   return (
     <div className="sticky top-0 w-full bg-white shadow-md h-12 flex justify-center items-center py-7 z-50">
       <div

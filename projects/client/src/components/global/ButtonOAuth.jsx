@@ -26,7 +26,7 @@ const ButtonOAuth = () => {
       if (!response.data?.ok) {
         setErrMsg(response.error?.message);
       }
-      console.log("response dr login", response);
+
       dispatch(userDocuments(response.data?.data));
     } catch (error) {
       if (
@@ -43,7 +43,6 @@ const ButtonOAuth = () => {
 
   useEffect(() => {
     if (user != null && Object.keys(user).length !== 0) {
-      console.log("user oAuth", user);
       const loginByGmail = async () => {
         try {
           const response = await axios.post("/user/register-by-gmail", {
@@ -51,7 +50,7 @@ const ButtonOAuth = () => {
             email: user.email,
             phone: "unregistered",
           });
-          console.log("response oauth", response);
+
           if (response.data.ok) {
             setLocalStorage(response.data?.access_token);
             const access_token = getLocalStorage("access_token");

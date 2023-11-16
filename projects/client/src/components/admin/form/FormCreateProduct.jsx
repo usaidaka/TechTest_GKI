@@ -45,8 +45,6 @@ const FormCreateProduct = ({ refetch, onClose }) => {
   }, []);
 
   const createProduct = async (values) => {
-    console.log("values", values);
-
     values.category_id = Number(selectedCategory);
     values.is_active = isActive;
 
@@ -61,9 +59,8 @@ const FormCreateProduct = ({ refetch, onClose }) => {
       const response = await axios.post("/admin/product", formData, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
-      console.log("create", response);
+
       if (response.data.ok) {
-        console.log("masuk");
         refetch();
         onClose();
       }

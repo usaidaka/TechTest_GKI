@@ -11,7 +11,7 @@ const DeleteFormProduct = ({ onClose, data, refetch }) => {
       const response = await axios.delete(`/admin/product/${data.id}`, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
-      console.log(response);
+
       if (!response.data.ok) {
         setErrMsg(response.data.message);
       }

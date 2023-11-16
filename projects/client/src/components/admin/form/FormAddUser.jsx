@@ -33,10 +33,9 @@ const FormAddUser = ({ refetch, onClose }) => {
       });
 
       if (!response.data.ok) {
-        console.log(response);
         setErrMsg(response.data.message);
       }
-      console.log("test", response.data);
+
       setSuccessMsg(response.data?.message);
       refetch();
       onClose();
@@ -113,8 +112,6 @@ const FormAddUser = ({ refetch, onClose }) => {
   };
 
   const inputPhotoRef = useRef();
-
-  console.log(successMsg);
 
   return (
     <>

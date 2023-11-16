@@ -427,10 +427,9 @@ module.exports = {
       new_confirm_password,
     } = req.body;
     const transaction = await db.sequelize.transaction();
-    console.log(userData);
+
     try {
       const image = req.file?.filename;
-      console.log(image);
 
       const user = await db.User.findOne({ where: { id: userData.id } });
 
